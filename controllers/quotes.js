@@ -7,13 +7,36 @@ const getQuoteById = async (req, res) => {
   try {
     // Query the database to get the quote by ID
     const quote = await pool.query('SELECT * FROM quotes WHERE id = $1', [quoteId]);
-    res.json(quote.rows[0]); // Assuming there's only one matching quote
+
+    if (quote.rowCount === 0) {
+      res.status(404).json({ error: 'Quote not found' });
+    } else {
+      res.json(quote.rows[0]);
+    }
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while fetching the quote.' });
   }
 };
 
+// Function to get a random quote
+const getRandomQuote = async (req, res) => {
+  try {
+    // Query the database to get a random quote
+    const quote = await pool.query('SELECT * FROM quotes ORDER BY RANDOM() LIMIT 1');
+    if (quote.rowCount === 0) {
+      res.status(404).json({ error: 'No quote was found!' });
+    } else {
+      res.json(quote.rows[0]);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while fetching a random quote.' });
+  }
+};
+
 module.exports = {
-  getQuoteById,
+  getRandomQuote,
+  getQuoteById
 };
