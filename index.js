@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+// CDN CSS
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+
+
 
 require('dotenv').config();
 
@@ -8,7 +12,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger-config'); //  Swagger configuration file.
 
 // Serve Swagger documentation
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec,{ customCssUrl: CSS_URL }));
 
 app.use(express.json());
 
