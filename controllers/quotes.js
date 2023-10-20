@@ -1,5 +1,27 @@
 const pool = require('../db'); // Import the PostgreSQL pool from db.js
 
+/**
+ * @swagger
+ * /quotes/{id}:
+ *   get:
+ *     summary: Get a quote by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Quote ID
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Quote'
+ *       404:
+ *         description: Quote not found
+ */
 // Function to get a quote by ID
 const getQuoteById = async (req, res) => {
   const quoteId = req.params.id; // Extract the ID from the request parameters
@@ -20,6 +42,22 @@ const getQuoteById = async (req, res) => {
   }
 };
 
+
+/**
+ * @swagger
+ * /quotes/random:
+ *   get:
+ *     summary: Get a random quote
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Quote'
+ *       500:
+ *         description: An error occurred while fetching a random quote
+ */
 // Function to get a random quote
 const getRandomQuote = async (req, res) => {
   try {

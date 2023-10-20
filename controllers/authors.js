@@ -1,5 +1,28 @@
 const pool = require('../db'); // Assuming you have a separate file for database setup
 
+
+/**
+ * @swagger
+ * /authors/{id}:
+ *   get:
+ *     summary: Get an author by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Author ID
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Author'
+ *       404:
+ *         description: Author not found
+ */
 // Function to get an author by ID
 const getAuthorById = async (req, res) => {
   const authorId = req.params.id;
@@ -22,6 +45,25 @@ const getAuthorById = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching the author.' });
   }
 };
+
+/**
+ * @swagger
+ * /authors/total:
+ *   get:
+ *     summary: Get the total number of authors
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalAuthors:
+ *                   type: integer
+ *       500:
+ *         description: An error occurred while fetching the total number of authors
+ */
 
 // Function to get the total number of authors (a fixed number)
 const getTotalAuthors = (req, res) => {
