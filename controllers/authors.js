@@ -19,7 +19,31 @@ const pool = require('../db'); // Assuming you have a separate file for database
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Author'
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       description: The author ID.
+ *                       example: 2
+ *                     name:
+ *                       type: string
+ *                       description: The author's name.
+ *                       example: Jane Austen
+ *                     birthdate:
+ *                       type: string
+ *                       description: The author's birthdate.
+ *                       example: December 16, 1775
+ *                     hint:
+ *                       type: string
+ *                       description: hint about the author
+ *                       example: English novelist
+ *                     bio:
+ *                       type: string
+ *                       description: complete bio of the author
+ *                       example: English novelist known for her romantic fiction set among the landed gentry.
  *       404:
  *         description: Author not found
  */

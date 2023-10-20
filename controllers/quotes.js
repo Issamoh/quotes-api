@@ -18,7 +18,26 @@ const pool = require('../db'); // Import the PostgreSQL pool from db.js
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Quote'
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: The unique identifier of the quote.
+ *                   example: 81
+ *                 text:
+ *                   type: string
+ *                   description: The text of the quote.
+ *                   example: "Anyone who has never made a mistake has never tried anything new."
+ *                 author_id:
+ *                   type: integer
+ *                   description: The author ID associated with the quote.
+ *                   example: 4
+ *                 tags:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: An array of tags associated with the quote.
+ *                   example: ["mistakes"]
  *       404:
  *         description: Quote not found
  */
@@ -54,10 +73,30 @@ const getQuoteById = async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Quote'
- *       500:
- *         description: An error occurred while fetching a random quote
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: The unique identifier of the quote.
+ *                   example: 81
+ *                 text:
+ *                   type: string
+ *                   description: The text of the quote.
+ *                   example: "Anyone who has never made a mistake has never tried anything new."
+ *                 author_id:
+ *                   type: integer
+ *                   description: The author ID associated with the quote.
+ *                   example: 4
+ *                 tags:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: An array of tags associated with the quote.
+ *                   example: ["mistakes"]
+ *       404:
+ *         description: Quote not found
  */
+
 // Function to get a random quote
 const getRandomQuote = async (req, res) => {
   try {
